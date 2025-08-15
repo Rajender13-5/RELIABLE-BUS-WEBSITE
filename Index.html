@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>RELIABLE BUS - Hotels</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      color: #1a1a1a;
+      margin: 0;
+      padding: 0;
+    }
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px 40px 20px;
+    }
+    header.top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+    }
+    .logo {
+      width: 56px;
+      height: 56px;
+      background: #fff;
+      border-radius: 8px;
+      border: 2px solid #009688;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 15px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    }
+    .logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+    h1 {
+      color: #009688;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    .search {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .search input {
+      width: 200px;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #cfd8dc;
+      font-size: 15px;
+    }
+    .search button {
+      padding: 10px 15px;
+      border-radius: 6px;
+      border: none;
+      background: #009688;
+      color: #fff;
+      font-size: 15px;
+      cursor: pointer;
+    }
+    nav.strip {
+      background: #009688;
+      border-radius: 10px;
+      padding: 14px 20px;
+      margin-top: 15px;
+    }
+    .menu {
+      list-style: none;
+      display: flex;
+      justify-content: space-around;
+      gap: 16px;
+      padding: 0;
+      margin: 0;
+    }
+    .menu a {
+      text-decoration: none;
+      color: #1a1a1a;
+      background: #fff;
+      padding: 12px 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+      font-weight: 500;
+    }
+    .back-btn {
+      margin: 20px 0;
+      padding: 8px 16px;
+      background: #ccc;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .page-title {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    .hotel-columns {
+      display: flex;
+      gap: 30px;
+      margin-top: 30px;
+    }
+    .hotel-column {
+      flex: 1 1 0;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+    .hotel-card {
+      border: 1px solid #eee;
+      border-radius: 10px;
+      background: #fff;
+      overflow: hidden;
+      transition: box-shadow 0.2s;
+    }
+    .hotel-image {
+      width: 100%;
+      height: 200px;
+      background: #eee;
+      overflow: hidden;
+    }
+    .hotel-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .hotel-details {
+      padding: 12px;
+    }
+    .hotel-details p {
+      margin: 5px 0;
+      color: #555;
+    }
+    .hotel-details p strong {
+      color: #1a1a1a;
+      font-size: 18px;
+    }
+    .price-book {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+    }
+    .price-book p {
+      font-weight: bold;
+      color: #009688;
+    }
+    .book-btn {
+      background: #f57c00;
+      color: #fff;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    @media (max-width: 900px) {
+      .hotel-columns {
+        flex-direction: column;
+      }
+      .hotel-column {
+        width: 100%;
+      }
+    }
+    @media (max-width: 600px) {
+      header.top {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+      }
+      .search {
+        width: 100%;
+      }
+      .hotel-image {
+        height: 140px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <div class="logo">
+          <img src="https://cdn.pixabay.com/photo/2013/07/13/12/46/bus-146859_1280.png" alt="Bus Logo">
+        </div>
+        <h1>RELIABLE BUS</h1>
+      </div>
+      <form class="search" onsubmit="event.preventDefault()">
+        <input type="search" placeholder="Search for buses...">
+        <button type="submit">Search</button>
+      </form>
+    </header>
+    <nav class="strip">
+      <ul class="menu">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Booking</a></li>
+        <li><a href="#">Offers</a></li>
+        <li><a href="#">Stays</a></li>
+        <li><a href="#">Destination</a></li>
+        <li><a href="#">About us</a></li>
+      </ul>
+    </nav>
+    <button class="back-btn" onclick="history.back()">Back</button>
+    <h2 class="page-title">Hotels Subpage</h2>
+    <main class="hotel-columns">
+      <div class="hotel-column">
+        <div class="hotel-card">
+          <div class="hotel-image">
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80" alt="The Leela Goa">
+          </div>
+          <div class="hotel-details">
+            <p><strong>The Leela Goa</strong></p>
+            <p>Goa</p>
+            <p>⭐⭐⭐⭐</p>
+            <p>Deluxe Room</p>
+            <div class="price-book">
+              <p>₹ 4500/night</p>
+              <button class="book-btn">Book now</button>
+            </div>
+          </div>
+        </div>
+        <div class="hotel-card">
+          <div class="hotel-image">
+            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80" alt="Taj Mahal Palace">
+          </div>
+          <div class="hotel-details">
+            <p><strong>Taj Mahal Palace</strong></p>
+            <p>Mumbai</p>
+            <p>⭐⭐⭐</p>
+            <p>Standard Room</p>
+            <div class="price-book">
+              <p>₹ 3200/night</p>
+              <button class="book-btn">Book now</button>
+            </div>
+          </div>
+        </div>
+        <div class="hotel-card">
+          <div class="hotel-image">
+            <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=600&q=80" alt="Shangri-La Hotel">
+          </div>
+          <div class="hotel-details">
+            <p><strong>Shangri-La Hotel</strong></p>
+            <p>Mussoorie</p>
+            <p>⭐⭐⭐⭐⭐</p>
+            <p>Luxury Suite</p>
+            <div class="price-book">
+              <p>₹ 6500/night</p>
+              <button class="book-btn">Book now</button>
+            </div>
+          </div>
+        </div>
+        <div class="hotel-card">
+          <div class="hotel-image">
+            <img src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=600&q=80" alt="Rambagh Palace">
+          </div>
+          <div class="hotel-details">
+            <p><strong>Rambagh Palace</strong></p>
+            <p>Jaipur</p>
+            <p>⭐⭐⭐⭐</p>
+            <p>Heritage Room</p>
+            <div class="price-book">
+              <p>₹ 5000/night</p>
+              <button class="book-btn">Book now</button>
+            </div>
+          </div>
+        </div>
+        <div class="hotel-card">
+          <div class="hotel-image">
+            <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=600&q=80" alt="Lemon Tree Premier">
+          </div>
+          <div class="hotel-details">
+            <p><strong>Lemon Tree Premier</strong></p>
+            <p>Delhi</p>
+            <p>⭐⭐⭐</p>
+            <p>Business Room</p>
+            <div class="price-book">
+              <p>₹ 3800/night</p>
+              <button class="book-btn">Book now</button>
+            </div>
+          </div>
+        </div>
+        <div class="hotel-card">
+          <div class="hotel-image">
+            <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=600&q=80" alt="Kumarakom Lake Resort">
+          </div>
+          <div class="hotel-details">
+            <p><strong>Kumarakom Lake Resort</strong></p>
+            <p>Kerala</p>
+            <p>⭐⭐⭐⭐</p>
+            <p>Sea View Room</p>
+            <div class="price-book">
+              <p>₹ 5200/night</p>
+              <button class="book-btn">Book now</button>
+            </div>
+          </div>
+        </div>
+        <div class="hotel-card">
+          <div class="hotel-image">
+            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Novotel Shimla">
+          </div>
+          <div class="hotel-details">
+            <p><strong>Novotel Shimla</strong></p>
+            <p>Shimla</p>
+            <p>⭐⭐⭐⭐</p>
+            <p>Mountain View Room</p>
+            <div class="price-book">
+              <p>₹ 4700/night</p>
+              <button class="book-btn">Book now</button>
+            </div>
+          </div>
+        </div>
+        <div class="hotel-card">
+          <div class="hotel-image">
+            <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=600&q=80" alt="ITC Kakatiya">
+          </div>
+          <div class="hotel-details">
+            <p><strong>ITC Kakatiya</strong></p>
+            <p>Hyderabad</p>
+            <p>⭐⭐⭐</p>
+            <p>Executive Room</p>
+            <div class="price-book">
+              <p>₹ 3900/night</p>
+              <button class="book-btn">Book now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="hotel-column">
+        <div class="hotel-card">
+          <div class="hotel-image">
+            <img src="https://images.unsplash.com/photo-1500048993953-d23a436266cf?auto=format&fit=crop&w=600&q=80" alt="The Park Chennai">
+          </div>
+          <div class="hotel-details">
+            <p><strong>The Park Chennai</strong></p>
+            <p>Chennai</p>
+            <p>⭐⭐⭐⭐</p>
+            <p>Business Suite</p>
+            <div class="price-book">
+              <p>₹ 5300/night</p>
+              <button class="book-btn">Book now</button>
+            </div>
+          </div>
+        </div>
+        <div class="hotel-card">
+          <div class="hotel-image">
+            <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=600&q=80" alt="The Westin Pune">
+          </div>
+          <div class="hotel-details">
+            <p><strong>The Westin Pune</strong></p>
+            <p>Pune</p>
+            <p>⭐⭐⭐</p>
+            <p>Standard Room</p>
+            <div class="price-book">
+              <p>₹ 3100/night</p>
+              <button class="book-btn">Book now</button>
+            </div>
+          </div>
+        </div>
+        <div class="hotel-card">
+          <div class="hotel-image">
+            <img src="https://images.unsplash.com/photo-1482062364825-616fd23b8fc1?auto=format&fit=crop&w=600&q=80" alt="Courtyard by Marriott Ahmedabad">
+          </div>
+          <div class="hotel-details">
+            <p><strong>Courtyard by Marriott</strong></p>
+            <p>Ahmedabad</p>
+            <p>⭐⭐⭐⭐</p>
+            <p>Deluxe Room</p>
+            <div class="price-book">
+              <p>₹ 4100/night</p>
+              <button class="book-btn">Book now</button>
+            </div>
+          </div>
+        </div>
+        <div class="hotel-card">
+          <div class="hotel-image">
+            <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80" alt="The Park Kolkata">
+          </div>
+          <div class="hotel-details">
+            <p><strong>The Park Kolkata</strong></p>
+            <p>Kolkata</p>
+            <p>⭐⭐⭐⭐</p>
+            <p>Luxury Suite</p>
+            <div class="price-book">
+              <p>₹ 6200/night</p>
+              <button class="book-btn">Book now</button>
+            </div>
+          </div>
+        </div>
+        <div class="hotel-card">
+          <div class="hotel-image">
+            <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=600&q=80" alt="The Leela Palace">
+          </div>
+          <div class="hotel-details">
+            <p><strong>The Leela Palace</strong></p>
+            <p>Udaipur</p>
+            <p>⭐⭐⭐⭐</p>
+            <p>Lake View Room</p>
+            <div class="price-book">
+              <p>₹ 5500/night</p>
+              <button class="book-btn">Book now</button>
+            </div>
+          </div>
+        </div>
+        <div class="hotel-card">
+          <div class="hotel-image">
+            <img src="https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=600&q=80" alt="Fairfield by Marriott Bengaluru">
+          </div>
+          <div class="hotel-details">
+            <p><strong>Fairfield by Marriott</strong></p>
+            <p>Bangalore</p>
+            <p>⭐⭐⭐</p>
+            <p>Standard Room</p>
+            <div class="price-book">
+              <p>₹ 3000/night</p>
+              <button class="book-btn">Book now</button>
+            </div>
+          </div>
+        </div>
+        <div class="hotel-card">
+          <div class="hotel-image">
+            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=600&q=80" alt="Citrus Mysore">
+          </div>
+          <div class="hotel-details">
+            <p><strong>Citrus Mysore</strong></p>
+            <p>Mysore</p>
+            <p>⭐⭐⭐⭐</p>
+            <p>Heritage Suite</p>
+            <div class="price-book">
+              <p>₹ 5200/night</p>
+              <button class="book-btn">Book now</button>
+            </div>
+          </div>
+        </div>
+        <div class="hotel-card">
+          <div class="hotel-image">
+            <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=600&q=80" alt="Sinclairs Darjeeling">
+          </div>
+          <div class="hotel-details">
+            <p><strong>Sinclairs Darjeeling</strong></p>
+            <p>Darjeeling</p>
+            <p>⭐⭐⭐⭐⭐</p>
+            <p>Mountain View Suite</p>
+            <div class="price-book">
+              <p>₹ 6700/night</p>
+              <button class="book-btn">Book now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
