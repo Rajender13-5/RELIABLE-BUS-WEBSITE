@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bus Booking – Wireframe</title>
+  <style>
+    :root{
+      --bg:#f6f7fb; --card:#ffffff; --ink:#111827; --muted:#6b7280; --brand:#2563eb; --line:#e5e7eb;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Helvetica,Arial; color:var(--ink); background:var(--bg)}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{width:min(1200px, 92%); margin-inline:auto}
+    .stack{display:flex;flex-direction:column;gap:1rem}
+    .row{display:flex;gap:1rem;align-items:center}
+    .between{justify-content:space-between}
+    .section{padding:48px 0}
+    .card{background:var(--card); border:1px solid var(--line); border-radius:16px; box-shadow:0 2px 6px rgba(0,0,0,.05)}
+    .pill{border:1px dashed var(--line); background:#fff; border-radius:999px; padding:.6rem 1rem; white-space:nowrap}
+    .btn{appearance:none;border:0;border-radius:12px;padding:.9rem 1.2rem;cursor:pointer;font-weight:600}
+    .btn.brand{background:var(--brand); color:#fff}
+    .btn.ghost{background:#fff; border:1px solid var(--line)}
+    .ghost{border:2px dashed #cbd5e1; background:#fff}
+    .muted{color:var(--muted)}
+    .space-sm{height:16px}
+    .space{height:32px}/* HEADER */
+header{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);z-index:10}
+.logo{width:44px;height:44px;border-radius:10px}
+.nav-icon{width:44px;height:32px;border-radius:8px}
+
+/* HERO */
+.hero{padding:56px 0 32px; background:linear-gradient(180deg,#eff6ff,#ffffff)}
+.hero h1{margin:0 0 20px; font-size:clamp(22px,4vw,34px)}
+.searchbar{display:grid; grid-template-columns:1fr 1fr 1fr auto; gap:12px}
+.input{display:flex;align-items:center;gap:.6rem; background:#fff;border:1px solid var(--line); border-radius:12px; padding:.9rem 1rem}
+.input input{border:0;outline:0;flex:1;font-size:1rem; background:transparent}
+.quick-dates{display:flex;gap:.5rem;flex-wrap:wrap}
+
+/* OFFERS */
+.offers{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
+.offer .photo{height:220px;border-radius:12px}
+.offer .text{padding:12px}
+
+/* ROUTES STRIP */
+.routes-strip{overflow:auto;display:flex;gap:.75rem;padding-bottom:.25rem}
+.routes-strip::-webkit-scrollbar{height:8px}
+
+/* ROUTE LIST (two rows like in sketch) */
+.route-row{display:flex;gap:12px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px 12px}
+.route-row .avatar{width:54px;height:54px;border-radius:10px}
+.stretch{height:50px}
+
+/* INFO GRID */
+.info-grid{border:1px solid var(--line);border-radius:16px;background:#fff;padding:20px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.info-grid .line{height:14px;background:#eef2f7;border-radius:6px}
+
+/* BIG PHOTO */
+.big-photo{height:300px;border-radius:16px}
+
+/* LISTING PAGE MOCK */
+.listing .bus-card{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;border:1px solid var(--line);border-radius:14px;background:#fff;padding:16px}
+.listing .bus-card h4{margin:0 0 6px}
+.tag{font-size:.85rem;border:1px solid var(--line);border-radius:10px;padding:.2rem .5rem}
+
+/* SEAT MAP */
+.tabs{display:flex;gap:8px}
+.seatmap{display:grid;grid-template-columns:repeat(5,48px);gap:10px;justify-content:center;padding:16px;border:1px solid var(--line);border-radius:16px;background:#fff}
+.seat{width:48px;height:48px;border-radius:10px;display:grid;place-items:center;font-size:.85rem}
+.seat.free{background:#e8f5ff;border:1px solid #bfdbfe}
+.seat.taken{background:#f3f4f6;border:1px dashed #cbd5e1;color:#9ca3af}
+.seat.selected{background:#2563eb;color:#fff}
+
+/* FOOTER */
+footer{margin-top:48px;padding:48px 0;background:#0f172a;color:#e5e7eb}
+footer .cols{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+footer .block{height:22px;background:#334155;border-radius:6px}
+
+/* RESPONSIVE */
+@media (max-width:900px){
+  .offers{grid-template-columns:1fr 1fr}
+  .searchbar{grid-template-columns:1fr 1fr}
+  .info-grid{grid-template-columns:1fr 1fr}
+  footer .cols{grid-template-columns:1fr 1fr}
+}
+@media (max-width:600px){
+  .offers{grid-template-columns:1fr}
+  .searchbar{grid-template-columns:1fr}
+  .info-grid{grid-template-columns:1fr}
+  footer .cols{grid-template-columns:1fr}
+}
+
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header>
+    <div class="container row between" style="padding:12px 0">
+      <div class="row" style="gap:.75rem">
+        <div class="ghost logo"></div>
+        <div class="pill">Reliable Bus</div>
+      </div>
+      <nav class="row" aria-label="primary">
+        <div class="ghost nav-icon"></div>
+        <div class="ghost nav-icon"></div>
+        <div class="ghost nav-icon"></div>
+        <div class="ghost nav-icon"></div>
+      </nav>
+    </div>
+  </header>
+  <!-- HOME / HERO + SEARCH -->
+  <section class="hero">
+    <div class="container stack">
+      <h1>Book Bus Tickets Online</h1>
+      <div class="searchbar">
+        <label class="input"><span class="muted">FROM</span> <input placeholder="Bengaluru" /></label>
+        <label class="input"><span class="muted">TO</span> <input placeholder="Hyderabad" /></label>
+        <div class="stack">
+          <label class="input"><span class="muted">DATE</span> <input type="date" /></label>
+          <div class="quick-dates">
+            <button class="btn ghost">Today</button>
+            <button class="btn ghost">Tomorrow</button>
+            <button class="btn ghost">Day After</button>
+          </div>
+        </div>
+        <button class="btn brand">Search</button>
+      </div>
+    </div>
+  </section>
+  <!-- OFFERS & DEALS -->
+  <section class="section">
+    <div class="container stack">
+      <h2 style="margin:0">Offers &amp; Deals</h2>
+      <div class="offers">
+        <article class="offer card">
+          <div class="ghost photo"></div>
+          <div class="text">
+            <div class="line" style="height:18px;background:#eaeef5;border-radius:8px"></div>
+            <div class="space-sm"></div>
+            <p class="muted" style="margin:0">Short description text goes here.</p>
+          </div>
+        </article>
+        <article class="offer card">
+          <div class="ghost photo"></div>
+          <div class="text">
+            <div class="line" style="height:18px;background:#eaeef5;border-radius:8px"></div>
+            <div class="space-sm"></div>
+            <p class="muted" style="margin:0">Short description text goes here.</p>
+          </div>
+        </article>
+        <article class="offer card">
+          <div class="ghost photo"></div>
+          <div class="text">
+            <div class="line" style="height:18px;background:#eaeef5;border-radius:8px"></div>
+            <div class="space-sm"></div>
+            <p class="muted" style="margin:0">Short description text goes here.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+  <!-- POPULAR BUS ROUTES -->
+  <section class="section" style="padding-top:0">
+    <div class="container stack">
+      <div class="row between"><h2 style="margin:0">Popular Bus Routes</h2></div>
+      <div class="row" style="gap:16px;align-items:flex-start">
+        <div class="card" style="width:220px;padding:12px">
+          <div class="ghost" style="height:100px;border-radius:12px"></div>
+          <div class="space-sm"></div>
+          <div class="line" style="height:18px;background:#eaeef5;border-radius:8px"></div>
+        </div>
+        <div style="flex:1">
+          <div class="routes-strip">
+            <span class="pill">Bengaluru ↔ Hyderabad</span>
+            <span class="pill">Pune ↔ Mumbai</span>
+            <span class="pill">Chennai ↔ Coimbatore</span>
+            <span class="pill">Delhi ↔ Jaipur</span>
+            <span class="pill">Kochi ↔ Trivandrum</span>
+            <span class="pill">Vizag ↔ Vijayawada</span>
+            <span class="pill">More…</span>
+          </div>
+          <div class="space"></div>
+          <!-- two route rows with image + xxxxxx like your sketch -->
+          <div class="route-row">
+            <div class="ghost avatar"></div>
+            <strong>Hyderabad</strong>
+            <div class="stretch" style="flex:1"></div>
+            <div class="muted">x x x x x x x x</div>
+          </div>
+          <div class="space-sm"></div>
+          <div class="route-row">
+            <div class="ghost avatar"></div>
+            <strong>Pune</strong>
+            <div class="stretch" style="flex:1"></div>
+            <div class="muted">x x x x x x x x</div>
+          </div>
+          <div class="space"></div>
+          <div class="route-row">
+            <div class="stretch" style="flex:1"></div>
+            <button class="btn ghost" style="margin-left:auto">View More</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- INFO TEXT BLOCKS -->
+  <section class="section" style="padding-top:0">
+    <div class="container stack">
+      <h2 style="margin:0">Book bus tickets online with …</h2>
+      <div class="info-grid">
+        <div class="line"></div><div class="line"></div><div class="line"></div>
+        <div class="line"></div><div class="line"></div><div class="line"></div>
+        <div class="line"></div><div class="line"></div><div class="line"></div>
+      </div>
+    </div>
+  </section>
+  <!-- BIG PHOTO -->
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="ghost big-photo"></div>
+    </div>
+  </section>
+  <!-- LISTING PAGE MOCK (separate section) -->
+  <section class="section listing" id="listing">
+    <div class="container stack">
+      <div class="row" style="gap:10px">
+        <div class="ghost avatar"></div>
+        <div class="pill">Filters</div>
+        <div class="pill">Sort</div>
+        <div class="pill">AC</div>
+        <div class="pill">Sleeper</div>
+      </div>
+      <h3 style="margin:0">Bengaluru to Hyderabad</h3>
+      <div class="muted">Date: 00-00-0000</div>
+      <div class="muted">201 buses found</div>
+      <article class="bus-card">
+        <div>
+          <h4>VRC Travels – A/C Sleeper</h4>
+          <div class="row" style="gap:.5rem">
+            <span class="tag">22:30</span>
+            <span class="tag">08:30</span>
+            <span class="tag">7:00</span>
+          </div>
+          <div class="space-sm"></div>
+          <button class="btn ghost">Dropping points</button>
+        </div>
+        <div class="stack" style="align-items:end">
+          <strong>Starting from ₹1365</strong>
+          <div class="muted">12 seats left</div>
+          <button class="btn brand">Select Seats</button>
+        </div>
+      </article>
+      <div class="card" style="height:200px"></div>
+      <div class="card" style="height:200px"></div>
+      <div class="card" style="height:200px"></div>
+    </div>
+  </section>
+  <!-- SEAT MAP MOCK (separate section) -->
+  <section class="section" id="seats">
+    <div class="container stack">
+      <h3 style="margin:0">Bengaluru → Hyderabad</h3>
+      <div class="muted">Date &amp; time</div>
+      <div class="tabs">
+        <button class="btn ghost">Seats</button>
+        <button class="btn brand">Lower Seats</button>
+        <button class="btn ghost">Upper Seats</button>
+      </div>
+      <div class="seatmap">
+        <div class="seat free">L1</div>
+        <div class="seat free">L2</div>
+        <div class="seat taken">L3</div>
+        <div class="seat free">L4</div>
+        <div class="seat free">L5</div>
+        <div class="seat free">L6</div>
+        <div class="seat taken">L7</div>
+        <div class="seat free">L8</div>
+        <div class="seat free">L9</div>
+        <div class="seat free">L10</div>
+        <div class="seat taken">L11</div>
+        <div class="seat free">L12</div>
+        <div class="seat free">L13</div>
+        <div class="seat free">L14</div>
+        <div class="seat taken">L15</div>
+      </div>
+      <div class="row between">
+        <div class="row" style="gap:.5rem">
+          <span class="tag">L(2)</span>
+          <span class="tag">S(1)</span>
+          <strong>₹ 1000</strong>
+        </div>
+        <button class="btn brand">Continue</button>
+      </div>
+    </div>
+  </section>
+  <!-- FOOTER -->
+  <footer>
+    <div class="container stack">
+      <div class="cols">
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+      </div>
+      <div class="space-sm"></div>
+      <div class="muted">© 2025 Reliable Bus (Wireframe)</div>
+    </div>
+  </footer>
+</body>
+</html>
