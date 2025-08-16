@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>RELIABLE BUS - All In One</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { font-family: Arial, sans-serif; background: #f9f9f9; color: #1a1a1a; margin: 0; padding: 0; }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 0 20px 40px 20px; }
+    header.top { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-bottom: 1px solid #e0e0e0; }
+    .brand { display: flex; align-items: center; }
+    .logo { width: 56px; height: 56px; background: #fff; border-radius: 8px; border: 2px solid #009688; display: flex; align-items: center; justify-content: center; margin-right: 15px; box-shadow: 0 4px 14px rgba(0,0,0,0.08);}
+    .logo img { width: 100%; height: 100%; object-fit: contain; border-radius: 8px;}
+    h1 { color: #009688; font-size: 28px; font-weight: bold; }
+    .search { display: flex; align-items: center; gap: 10px; }
+    .search input { width: 200px; padding: 10px; border-radius: 6px; border: 1px solid #cfd8dc; font-size: 15px; }
+    .search button { padding: 10px 15px; border-radius: 6px; border: none; background: #009688; color: #fff; font-size: 15px; cursor: pointer; }
+    nav.strip { background: #009688; border-radius: 10px; padding: 14px 20px; margin-top: 15px; }
+    .menu { list-style: none; display: flex; justify-content: space-around; gap: 16px; padding: 0; margin: 0; }
+    .menu a, .menu button.tab-btn { text-decoration: none; color: #1a1a1a; background: #fff; padding: 12px 20px; border-radius: 10px; box-shadow: 0 4px 14px rgba(0,0,0,0.08); font-weight: 500; border: none; cursor: pointer; font-family: inherit;}
+    .menu .active { background: #f57c00; color: #fff;}
+    .main-banner { margin: 36px 0 24px 0; background: #fff; border-radius: 10px; padding: 40px 24px; box-shadow: 0 4px 18px rgba(0,0,0,0.08);}
+    .main-banner h2 { color: #009688; font-size: 32px; margin-bottom: 10px; }
+    .main-banner p { font-size: 19px; color: #444; }
+    .quick-links { display: flex; flex-wrap: wrap; gap: 24px; margin-top: 40px;}
+    .quick-link { flex: 1 1 220px; background: #fff; border-radius: 10px; box-shadow: 0 4px 14px rgba(0,0,0,0.06); padding: 30px 20px; text-align: center;}
+    .quick-link h3 { color: #009688; }
+    .quick-link a { display: inline-block; margin-top: 10px; color: #f57c00; text-decoration: none; font-weight: bold; }
+
+    .booking-section, .offers-section, .dest-section, .about-section, .hotel-columns { background: #fff; border-radius: 10px; margin-top: 36px; padding: 32px 18px; box-shadow: 0 4px 14px rgba(0,0,0,0.07);}
+    .booking-section h2, .offers-section h2, .dest-section h2, .about-section h2, .page-title { color: #009688; margin-bottom: 10px;}
+    .booking-form { display: flex; flex-wrap: wrap; gap: 20px; margin-top: 24px;}
+    .booking-form label { display: block; font-weight: bold; margin-bottom: 6px;}
+    .booking-form input, .booking-form select { width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #bbb; font-size: 15px;}
+    .booking-form > div { flex: 1 1 210px;}
+    .book-btn-main { margin-top: 20px; background: #f57c00; color: #fff; border: none; padding: 12px 26px; border-radius: 5px; font-size: 17px; cursor: pointer;}
+    .offers-section h2 { color: #009688; margin-bottom: 10px;}
+    .offer-card { background: #f4faff; border-left: 5px solid #009688; margin: 20px 0; padding: 20px 18px; border-radius: 7px;}
+    .offer-card h3 { margin: 0 0 6px 0; color: #f57c00;}
+    .offer-card p { margin: 0;}
+    .dest-grid { display: flex; flex-wrap: wrap; gap: 28px; margin-top: 26px;}
+    .dest-card { flex: 1 1 220px; min-width: 220px; background: #f4faff; border-radius: 10px; box-shadow: 0 4px 14px rgba(0,0,0,0.06); padding: 20px 15px; text-align: center;}
+    .dest-card img { width: 100%; height: 120px; object-fit: cover; border-radius: 10px; }
+    .dest-card h3 { color: #009688; margin: 10px 0 5px 0;}
+    .dest-card p { color: #555; font-size: 15px;}
+    .about-section p { font-size: 17px; color: #444; margin-bottom: 10px;}
+    .about-section ul { margin-left: 18px; }
+    .about-section ul li { font-size: 16px; margin-bottom: 4px;}
+    .back-btn { margin: 20px 0; padding: 8px 16px; background: #ccc; border: none; border-radius: 4px; cursor: pointer;}
+    .hotel-columns { display: flex; gap: 30px; margin-top: 30px; }
+    .hotel-column { flex: 1 1 0; display: flex; flex-direction: column; gap: 30px;}
+    .hotel-card { border: 1px solid #eee; border-radius: 10px; background: #fff; overflow: hidden; transition: box-shadow 0.2s;}
+    .hotel-image { width: 100%; height: 200px; background: #eee; overflow: hidden;}
+    .hotel-image img { width: 100%; height: 100%; object-fit: cover;}
+    .hotel-details { padding: 12px;}
+    .hotel-details p { margin: 5px 0; color: #555;}
+    .hotel-details p strong { color: #1a1a1a; font-size: 18px;}
+    .price-book { display: flex; justify-content: space-between; align-items: center; margin-top: 10px;}
+    .price-book p { font-weight: bold; color: #009688;}
+    .book-btn { background: #f57c00; color: #fff; border: none; padding: 6px 12px; border-radius: 4px; font-size: 14px; cursor: pointer;}
+    @media (max-width: 900px) {
+      .hotel-columns { flex-direction: column; }
+      .hotel-column { width: 100%; }
+      .quick-links { flex-direction: column; }
+      .quick-link { width: 100%; }
+      .dest-grid { flex-direction: column;}
+      .dest-card { width: 100%;}
+    }
+    @media (max-width: 600px) {
+      header.top { flex-direction: column; align-items: flex-start; gap: 15px;}
+      .search { width: 100%;}
+      .hotel-image { height: 140px;}
+      .main-banner { padding: 20px 8px;}
+    }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+  </style>
+  <script>
+    function showTab(tab) {
+      // Hide all
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+      // Show selected
+      document.getElementById(tab).classList.add('active');
+      document.getElementById('tab-'+tab).classList.add('active');
+      // Optional: Scroll to top for UX
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+    window.onload = function() {
+      // Default tab
+      showTab('home');
+    };
+  </script>
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <div class="logo">
+          <img src="https://cdn.pixabay.com/photo/2013/07/13/12/46/bus-146859_1280.png" alt="Bus Logo">
+        </div>
+        <h1>RELIABLE BUS</h1>
+      </div>
+      <form class="search" onsubmit="event.preventDefault()">
+        <input type="search" placeholder="Search for buses...">
+        <button type="submit">Search</button>
+      </form>
+    </header>
+    <nav class="strip">
+      <ul class="menu">
+        <li><button class="tab-btn" id="tab-home" onclick="showTab('home')">Home</button></li>
+        <li><button class="tab-btn" id="tab-bookings" onclick="showTab('bookings')">Booking</button></li>
+        <li><button class="tab-btn" id="tab-offers" onclick="showTab('offers')">Offers</button></li>
+        <li><button class="tab-btn" id="tab-hotels" onclick="showTab('hotels')">Stays</button></li>
+        <li><button class="tab-btn" id="tab-destination" onclick="showTab('destination')">Destination</button></li>
+        <li><button class="tab-btn" id="tab-about" onclick="showTab('about')">About us</button></li>
+      </ul>
+    </nav>
+    <!-- Home Tab -->
+    <div class="tab-content" id="home">
+      <div class="main-banner">
+          
+        <h2>Welcome to Reliable Bus</h2>
+       
+        <p>
+          Your Journey Begins Here
+Find the best buses, hotels, and travel deals all in one place. Comfort, safety, and great prices — every time. 
+        </p>
+      </div>
+      <div class="quick-links">
+        <div class="quick-link">
+          <h3>Book a Bus</h3>
+          <p>Choose your route and book your seats instantly.</p>
+          <a href="javascript:void(0);" onclick="showTab('bookings')">Book Now</a>
+        </div>
+        <div class="quick-link">
+          <h3>Hotel Stays</h3>
+          <p>Add a comfortable hotel stay to your journey.</p>
+          <a href="javascript:void(0);" onclick="showTab('hotels')">Find Hotels</a>
+        </div>
+        <div class="quick-link">
+          <h3>Special Offers</h3>
+          <p>Save more with our latest deals and offers.</p>
+          <a href="javascript:void(0);" onclick="showTab('offers')">See Offers</a>
+        </div>
+        <div class="quick-link">
+          <h3>Explore Destinations</h3>
+          <p>Get inspired for your next trip.</p>
+          <a href="javascript:void(0);" onclick="showTab('destination')">Explore</a>
+        </div>
+        <div class="quick-link">
+          <h3>About Us</h3>
+          <p>Learn more about Reliable Bus.</p>
+          <a href="javascript:void(0);" onclick="showTab('about')">Read More</a>
+        </div>
+      </div>
+    </div>
+    <!-- Bookings Tab -->
+    <div class="tab-content" id="bookings">
+      <div class="booking-section">
+        <h2>Book Your Bus</h2>
+        <form class="booking-form" onsubmit="event.preventDefault();alert('Booking submitted!');">
+          <div>
+            <label for="from">From</label>
+            <input type="text" id="from" name="from" placeholder="Departure city" required>
+          </div>
+          <div>
+            <label for="to">To</label>
+            <input type="text" id="to" name="to" placeholder="Destination city" required>
+          </div>
+          <div>
+            <label for="date">Date</label>
+            <input type="date" id="date" name="date" required>
+          </div>
+          <div>
+            <label for="seats">Seats</label>
+            <select id="seats" name="seats">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4+">4+</option>
+            </select>
+          </div>
+          <div style="flex:1 1 110px;align-self: flex-end;">
+            <button class="book-btn-main" type="submit">Book Now</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- Offers Tab -->
+    <div class="tab-content" id="offers">
+      <div class="offers-section">
+        <h2>Latest Offers</h2>
+        <div class="offer-card">
+          <h3>Flat 20% Off on First Booking!</h3>
+          <p>Use code <b>FIRST20</b> to avail discount. T&C apply.</p>
+        </div>
+        <div class="offer-card">
+          <h3>Summer Special: Save ₹200</h3>
+          <p>Book tickets above ₹1500 and get ₹200 off. Use code <b>SUMMER200</b>.</p>
+        </div>
+        <div class="offer-card">
+          <h3>Get Free Stay on Selected Routes</h3>
+          <p>Book round-trip tickets and enjoy a free hotel night. Limited period offer.</p>
+        </div>
+        <div class="offer-card">
+          <h3>Refer & Earn</h3>
+          <p>Refer friends and earn ₹100 wallet credit on their first booking.</p>
+        </div>
+      </div>
+    </div>
+    <!-- Hotels Tab -->
+    <div class="tab-content" id="hotels">
+      <button class="back-btn" onclick="showTab('home')">Back</button>
+      <h2 class="page-title">Hotels Subpage</h2>
+      <main class="hotel-columns">
+        <div class="hotel-column">
+          <div class="hotel-card">
+            <div class="hotel-image">
+              <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80" alt="The Leela Goa">
+            </div>
+            <div class="hotel-details">
+              <p><strong>The Leela Goa</strong></p>
+              <p>Goa</p>
+              <p>⭐⭐⭐⭐</p>
+              <p>Deluxe Room</p>
+              <div class="price-book">
+                <p>₹ 4500/night</p>
+                <button class="book-btn">Book now</button>
+              </div>
+            </div>
+          </div>
+          <div class="hotel-card">
+            <div class="hotel-image">
+              <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80" alt="Taj Mahal Palace">
+            </div>
+            <div class="hotel-details">
+              <p><strong>Taj Mahal Palace</strong></p>
+              <p>Mumbai</p>
+              <p>⭐⭐⭐</p>
+              <p>Standard Room</p>
+              <div class="price-book">
+                <p>₹ 3200/night</p>
+                <button class="book-btn">Book now</button>
+              </div>
+            </div>
+          </div>
+          <div class="hotel-card">
+            <div class="hotel-image">
+              <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=600&q=80" alt="Shangri-La Hotel">
+            </div>
+            <div class="hotel-details">
+              <p><strong>Shangri-La Hotel</strong></p>
+              <p>Mussoorie</p>
+              <p>⭐⭐⭐⭐⭐</p>
+              <p>Luxury Suite</p>
+              <div class="price-book">
+                <p>₹ 6500/night</p>
+                <button class="book-btn">Book now</button>
+              </div>
+            </div>
+          </div>
+          <div class="hotel-card">
+            <div class="hotel-image">
+              <img src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=600&q=80" alt="Rambagh Palace">
+            </div>
+            <div class="hotel-details">
+              <p><strong>Rambagh Palace</strong></p>
+              <p>Jaipur</p>
+              <p>⭐⭐⭐⭐</p>
+              <p>Heritage Room</p>
+              <div class="price-book">
+                <p>₹ 5000/night</p>
+                <button class="book-btn">Book now</button>
+              </div>
+            </div>
+          </div>
+          <div class="hotel-card">
+            <div class="hotel-image">
+              <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=600&q=80" alt="Lemon Tree Premier">
+            </div>
+            <div class="hotel-details">
+              <p><strong>Lemon Tree Premier</strong></p>
+              <p>Delhi</p>
+              <p>⭐⭐⭐</p>
+              <p>Business Room</p>
+              <div class="price-book">
+                <p>₹ 3800/night</p>
+                <button class="book-btn">Book now</button>
+              </div>
+            </div>
+          </div>
+          <div class="hotel-card">
+            <div class="hotel-image">
+              <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=600&q=80" alt="Kumarakom Lake Resort">
+            </div>
+            <div class="hotel-details">
+              <p><strong>Kumarakom Lake Resort</strong></p>
+              <p>Kerala</p>
+              <p>⭐⭐⭐⭐</p>
+              <p>Sea View Room</p>
+              <div class="price-book">
+                <p>₹ 5200/night</p>
+                <button class="book-btn">Book now</button>
+              </div>
+            </div>
+          </div>
+          <div class="hotel-card">
+            <div class="hotel-image">
+              <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Novotel Shimla">
+            </div>
+            <div class="hotel-details">
+              <p><strong>Novotel Shimla</strong></p>
+              <p>Shimla</p>
+              <p>⭐⭐⭐⭐</p>
+              <p>Mountain View Room</p>
+              <div class="price-book">
+                <p>₹ 4700/night</p>
+                <button class="book-btn">Book now</button>
+              </div>
+            </div>
+          </div>
+          <div class="hotel-card">
+            <div class="hotel-image">
+              <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=600&q=80" alt="ITC Kakatiya">
+            </div>
+            <div class="hotel-details">
+              <p><strong>ITC Kakatiya</strong></p>
+              <p>Hyderabad</p>
+              <p>⭐⭐⭐</p>
+              <p>Executive Room</p>
+              <div class="price-book">
+                <p>₹ 3900/night</p>
+                <button class="book-btn">Book now</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="hotel-column">
+          <div class="hotel-card">
+            <div class="hotel-image">
+              <img src="https://images.unsplash.com/photo-1500048993953-d23a436266cf?auto=format&fit=crop&w=600&q=80" alt="The Park Chennai">
+            </div>
+            <div class="hotel-details">
+              <p><strong>The Park Chennai</strong></p>
+              <p>Chennai</p>
+              <p>⭐⭐⭐⭐</p>
+              <p>Business Suite</p>
+              <div class="price-book">
+                <p>₹ 5300/night</p>
+                <button class="book-btn">Book now</button>
+              </div>
+            </div>
+          </div>
+          <div class="hotel-card">
+            <div class="hotel-image">
+              <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=600&q=80" alt="The Westin Pune">
+            </div>
+            <div class="hotel-details">
+              <p><strong>The Westin Pune</strong></p>
+              <p>Pune</p>
+              <p>⭐⭐⭐</p>
+              <p>Standard Room</p>
+              <div class="price-book">
+                <p>₹ 3100/night</p>
+                <button class="book-btn">Book now</button>
+              </div>
+            </div>
+          </div>
+          <div class="hotel-card">
+            <div class="hotel-image">
+              <img src="https://images.unsplash.com/photo-1482062364825-616fd23b8fc1?auto=format&fit=crop&w=600&q=80" alt="Courtyard by Marriott Ahmedabad">
+            </div>
+            <div class="hotel-details">
+              <p><strong>Courtyard by Marriott</strong></p>
+              <p>Ahmedabad</p>
+              <p>⭐⭐⭐⭐</p>
+              <p>Deluxe Room</p>
+              <div class="price-book">
+                <p>₹ 4100/night</p>
+                <button class="book-btn">Book now</button>
+              </div>
+            </div>
+          </div>
+          <div class="hotel-card">
+            <div class="hotel-image">
+              <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80" alt="The Park Kolkata">
+            </div>
+            <div class="hotel-details">
+              <p><strong>The Park Kolkata</strong></p>
+              <p>Kolkata</p>
+              <p>⭐⭐⭐⭐</p>
+              <p>Luxury Suite</p>
+              <div class="price-book">
+                <p>₹ 6200/night</p>
+                <button class="book-btn">Book now</button>
+              </div>
+            </div>
+          </div>
+          <div class="hotel-card">
+            <div class="hotel-image">
+              <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=600&q=80" alt="The Leela Palace">
+            </div>
+            <div class="hotel-details">
+              <p><strong>The Leela Palace</strong></p>
+              <p>Udaipur</p>
+              <p>⭐⭐⭐⭐</p>
+              <p>Lake View Room</p>
+              <div class="price-book">
+                <p>₹ 5500/night</p>
+                <button class="book-btn">Book now</button>
+              </div>
+            </div>
+          </div>
+          <div class="hotel-card">
+            <div class="hotel-image">
+              <img src="https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=600&q=80" alt="Fairfield by Marriott Bengaluru">
+            </div>
+            <div class="hotel-details">
+              <p><strong>Fairfield by Marriott</strong></p>
+              <p>Bangalore</p>
+              <p>⭐⭐⭐</p>
+              <p>Standard Room</p>
+              <div class="price-book">
+                <p>₹ 3000/night</p>
+                <button class="book-btn">Book now</button>
+              </div>
+            </div>
+          </div>
+          <div class="hotel-card">
+            <div class="hotel-image">
+              <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=600&q=80" alt="Citrus Mysore">
+            </div>
+            <div class="hotel-details">
+              <p><strong>Citrus Mysore</strong></p>
+              <p>Mysore</p>
+              <p>⭐⭐⭐⭐</p>
+              <p>Heritage Suite</p>
+              <div class="price-book">
+                <p>₹ 5200/night</p>
+                <button class="book-btn">Book now</button>
+              </div>
+            </div>
+          </div>
+          <div class="hotel-card">
+            <div class="hotel-image">
+              <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=600&q=80" alt="Sinclairs Darjeeling">
+            </div>
+            <div class="hotel-details">
+              <p><strong>Sinclairs Darjeeling</strong></p>
+              <p>Darjeeling</p>
+              <p>⭐⭐⭐⭐⭐</p>
+              <p>Mountain View Suite</p>
+              <div class="price-book">
+                <p>₹ 6700/night</p>
+                <button class="book-btn">Book now</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <!-- Destination Tab -->
+    <div class="tab-content" id="destination">
+      <div class="dest-section">
+        <h2>Popular Destinations</h2>
+        <div class="dest-grid">
+          <div class="dest-card">
+            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Shimla">
+            <h3>Shimla</h3>
+            <p>Snowy mountains, colonial charm and pine forests await you.</p>
+          </div>
+          <div class="dest-card">
+            <img src="https://images.unsplash.com/photo-1465101178521-c1a9136a3fd8?auto=format&fit=crop&w=400&q=80" alt="Goa">
+            <h3>Goa</h3>
+            <p>Beach parties, seafood and sunsets. India's party capital!</p>
+          </div>
+          <div class="dest-card">
+            <img src="https://images.unsplash.com/photo-1477587458883-47145ed94245?auto=format&fit=crop&w=400&q=80" alt="Jaipur">
+            <h3>Jaipur</h3>
+            <p>Explore pink city palaces, vibrant bazaars and royal forts.</p>
+          </div>
+          <div class="dest-card">
+            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80" alt="Mysore">
+            <h3>Mysore</h3>
+            <p>Palatial grandeur, gardens, and a taste of royal history.</p>
+          </div>
+          <div class="dest-card">
+            <img src="https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?auto=format&fit=crop&w=400&q=80" alt="Bangalore">
+            <h3>Bangalore</h3>
+            <p>Garden city, tech hub and foodie's delight.</p>
+          </div>
+          <div class="dest-card">
+            <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=400&q=80" alt="Pune">
+            <h3>Pune</h3>
+            <p>Cultural capital with lively nightlife and delicious food.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- About Tab -->
+    <div class="tab-content" id="about">
+      <div class="about-section">
+        <h2>About Reliable Bus</h2>
+        <p>
+          Reliable Bus is your trusted partner for all your travel needs. We offer seamless bus ticket booking, exclusive hotel stays, and curated travel experiences across India.
+        </p>
+        <ul>
+          <li>Book bus tickets to hundreds of destinations</li>
+          <li>Choose from premium and budget hotels</li>
+          <li>Enjoy customer-friendly offers and rewards</li>
+          <li>24/7 customer support and easy cancellation</li>
+        </ul>
+        <p>
+          Our mission is to make travel easy, comfortable, and affordable for everyone. Thank you for choosing Reliable Bus!
+        </p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
